@@ -4,6 +4,7 @@ class Node{
         this.x = x
         this.y = y
         this.name = name
+        this.color = "green"
     }
 }
 
@@ -26,13 +27,13 @@ class Matrix{
             let nodeY = y * distanceBetweenNodes + 50
             let node = new Node(nodeX, nodeY, i)
             this.nodes.push(node)
-            console.log(" x: " + x + " y: " + y + " i: " + i)
+            // console.log(" x: " + x + " y: " + y + " i: " + i)
             x++
         }
     }
 
     printNodes(){
-        console.log(this.nodes)
+        // console.log(this.nodes)
     }
 
     getNodes(){
@@ -44,7 +45,7 @@ class Matrix{
         for(let i in this.nodes){
             if(this.nodes[i].name == name){
                 this.nodes[i].edges.push(edgeName)
-                console.log(this.nodes[i].edges)
+                // console.log(this.nodes[i].edges)
             }
         }
     }  
@@ -52,7 +53,7 @@ class Matrix{
     // changes the position of a node by referencing the nodes name
     updateNodePositionByName(name, x2, y2){
         if(this.nodes == null){
-            console.log("nodes is null in updateNodePositionByName");
+            // console.log("nodes is null in updateNodePositionByName");
             return
         }
         for(let i in this.nodes){

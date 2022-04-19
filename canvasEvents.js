@@ -9,7 +9,7 @@ canvas.addEventListener("click",
 function(event) {
 
     mouse = oMousePos(canvas, event)
-    console.log(mouse)
+    // console.log(mouse)
 
     // node already selected
     if(nodeSelected == true){

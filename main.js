@@ -8,7 +8,7 @@ function createNodeMatrix(){
 
      // validate user input from the matrix input boxes
     if(!validateMatrixInputs()){
-        console.log("validation says fuck you")
+        // console.log("validation says fuck you")
         return
     }
 
@@ -22,21 +22,21 @@ function createNodeMatrix(){
 
     // check to see if user input is within bounds
     let rows = result[0]
-    console.log(rows)
+    // console.log(rows)
     if (rows < 1){
         alert("Invalid rows in addNodeMatrix")
         delete currentCanvasView
     }
 
     let cols = result[1]
-    console.log(cols)
+    // console.log(cols)
     if (rows < 1){
         alert("Invalid cols in addNodeMatrix")
         delete currentCanvasView
     }
 
     let numOfNodes = result[2]
-    console.log(numOfNodes)
+    // console.log(numOfNodes)
     if (numOfNodes > rows * cols){
         alert("To many numOfNodes in addNodeMatrix")
         delete currentCanvasView
@@ -58,7 +58,7 @@ function createNodeMatrix(){
 
     // get the nodes in currentMatrix
     matrixNodes = currentMatrix.getNodes();
-    console.log(matrixNodes)
+    // console.log(matrixNodes)
     
     if(!currentCanvasView.drawMatrix(matrixNodes)){
         delete currentMatrix
@@ -148,15 +148,17 @@ function createEdge(){
 
     // format input
     result = result.split(" ");
+    let fromNodeName = result[0];
+    let toNodeName = result[1];
     let x1, x2, y1, y2
     let nodes = matrix.getNodes()
     for(let i in nodes){
-        console.log(nodes[i].name)
-        if(nodes[i].name == result[0]){
+        if(nodes[i].name == fromNodeName){
+            console.log(nodes[i].name)
             x1 = nodes[i].x
             y1 = nodes[i].y
         }
-        else if(nodes[i].name == result[1]){
+        else if(nodes[i].name == toNodeName){
             x2 = nodes[i].x
             y2 = nodes[i].y
         }
@@ -169,12 +171,28 @@ function createEdge(){
 
     // draw the edge and redraw circles on top
     canvasV.drawEdge(x1, y1, x2, y2)
-    canvasV.drawCircle(x1, y1, 20)
-    canvasV.drawCircle(x2, y2, 20)
+    canvasV.drawCircle(x1, y1, 20, 'green')
+    canvasV.drawCircle(x2, y2, 20, 'green')
 
+    let rotLine1 = canvasV.rotateLineAngle(x1, y1, x2, y2, 10)
+    while(canvasV.calculateDistance(...rotLine1) > 30){
+        rotLine1 = canvasV.doubleCutAroundMid(...rotLine1)
+    }
+
+    let rotLine2 = canvasV.rotateLineAngle(x1, y1, x2, y2, -10)
+    while(canvasV.calculateDistance(...rotLine2) > 30){
+        rotLine2 = canvasV.doubleCutAroundMid(...rotLine2)
+    }
+
+    rotLine1 = canvasV.cutRightHalf(...rotLine1)
+    rotLine2 = canvasV.cutRightHalf(...rotLine2)
+
+    canvasV.drawEdge(...rotLine1)
+    canvasV.drawEdge(...rotLine2)
+    
     // update matrix.edges
     matrix.updateNodeEdgeByName(result[0], result[1])
-    matrix.updateNodeEdgeByName(result[1], result[0])
+    // matrix.updateNodeEdgeByName(result[1], result[0])
 }
 
 // Computes the midpoint of a line
