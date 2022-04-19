@@ -1,9 +1,58 @@
 <!DOCTYPE html>
 <body id="main-body">
-    <div>
-        <button type="button" onclick="addRectangle()">Add Rectangle</button>
+    <style>
+        .menu {
+            position: relative;
+        }
+    </style>
+    <div class="menu">
+        <style>
+            input, label {
+                display:block;
+            }  
+            .labelInput{
+                margin-right:10px;
+            }
+        </style>
+        <div class="labelInput" >
+            <label for="rows">Rows</label>
+            <input id="rows" type="text" value="" name="rows">
+        </div>
+    
+        <div class="labelInput" >
+            <label for="cols">Cols</label>
+            <input id="cols" type="text" value="" name="cols">
+        </div>
+
+        <div class="labelInput">
+            <label for="numOfNodes">Number of nodes</label>
+            <input id="numOfNodes" type="text" value="" name="numOfNodes">
+        </div>
+
+        <div class="labelInput" >
+            <label for="spacing">Spacing</label>
+            <input id="spacing" type="text" value="" name="spacing">
+            <button type="button" onclick="createNodeMatrix()">Create node matrix</button>
+        </div>
+
+        <div class="labelInput" >
+            <label for="addEdge">Add connection</label>
+            <input id="addEdge" type="text" value="" name="addEdge">
+            <button type="button" onclick="createEdge()">Submit connection</button>
+        </div>    
+    </div>
+    <div class="menu">
+        <br> 
+            <button type="button" onclick="clearCanvas()">Clear canvas</button>
+            <button type="button" onclick="addNode()">Add circle</button>
+            <input type="file" name="file" id="file">
+            <button onclick="uploadFile()" name="uploadFile">Upload file</button>
+        </br>
     </div>
     <canvas id="canvas1" width="1200" height="700" style="border:1px solid #000000;"></canvas> 
 </body>
 <script src="main.js"></script>
+<script src="model.js"></script>
+<script src="view.js"></script>
+<script src="canvasEvents.js"></script>
 
