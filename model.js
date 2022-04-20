@@ -44,6 +44,15 @@ class Matrix{
         this.nodes = nodes
     }
 
+    searchForNodeByName(name){
+        for(let i in this.nodes){
+            if(this.nodes[i].name == name){
+                return this.nodes[i]
+            }
+        }
+        return null
+    }
+
     // changes the value of node.edges
     updateNodeEdgeByName(name, edgeName){
         for(let i in this.nodes){
