@@ -40,6 +40,10 @@ class Matrix{
         return this.nodes
     }
 
+    setNodes(nodes){
+        this.nodes = nodes
+    }
+
     // changes the value of node.edges
     updateNodeEdgeByName(name, edgeName){
         for(let i in this.nodes){

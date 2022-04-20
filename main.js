@@ -1,6 +1,5 @@
 let matrix; // instance of model.js matrix
 let canvasV; // instance of view.js canvasView 
-
 // Below are a set of controllers
 
 // creates a new instance of a model.js matrix
