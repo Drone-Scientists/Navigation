@@ -190,4 +190,25 @@ class canvasView{
         let y = y2 - y1;
         return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
     }
+
+    findIntersection(x1, y1, x2, y2, x3, y3, x4, y4) {
+        let numX = (x1 * y2 - y1 * x2) * (x3 - x4) - (x1 - x2) * (x3 * y4 - y3 * x4)
+        let denX = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4)
+        let numY = (x1 * y2 - y1 * x2) * (y3 - y4) - (y1 - y2) * (x3 * y4 - y3 * x4)
+        let denY = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4)
+        let x = numX / denX
+        let y = numY / denY
+        return [x, y];
+    }
+
+    findSlope(x1, y1, x2, y2) {
+        let m = (y2 - y1) / (x2 - x1)
+        return m
+    }
+
+    findPoint(m, x, y, d) {
+        let x1 = x + d * Math.cos(Math.atan(m))
+        let y1 = y + d * Math.sin(Math.atan(m))
+        return [x1, y1]
+    }
 }
