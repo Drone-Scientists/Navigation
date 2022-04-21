@@ -249,3 +249,14 @@ function squareGreaterThanTen(vel){
     }
     return vel
 }
+
+function printEdges(){
+    if(matrix == null){
+        alert("Matrix is not created")
+        return
+    }
+    let edges = matrix.getEdges()
+    for(let i in edges){
+        console.log(i, " ", edges[i])
+    }
+}

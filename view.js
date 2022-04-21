@@ -81,9 +81,70 @@ class canvasView{
         this.context.stroke();   
     }
 
+    searchNodesByName(name, nodes){
+        if(!nodes){
+            alert("nodes empty in searchNodesByName")
+            return
+        }
+        for(let i in nodes){
+            if(nodes[i].name == name){
+                return nodes[i]
+            }
+        }
+        return false
+    }
+
     // redraws all the edges / connections on the canvas
     redrawEdges(nodes){
-        let filteredNodes = nodes.filter(node => node.edges != null);
+        console.log("redrawing edges")
+        let filteredNodes = nodes.filter(node => node.edges.length > 0);
+        console.log(filteredNodes)
+        for(let i in filteredNodes){
+            let fromNodeX = filteredNodes[i].x
+            let fromNodeY = filteredNodes[i].y
+            let fromNode = filteredNodes[i]
+            for(let j in fromNode.edges){
+                console.log("From node edge name:", fromNode.edges[j].to)
+                let toNode = this.searchNodesByName(fromNode.edges[j].to, nodes)
+                console.log("To node:",toNode)
+                let toNodeX = toNode.x
+                let toNodeY = toNode.y
+
+                console.log("got here")
+                console.log("FromNodeX", fromNodeX)
+                console.log("FromNodeY", fromNodeY)
+                console.log("ToNodeX", toNodeX)
+                console.log("ToNodeY", toNodeY)
+                
+                this.drawEdge(fromNodeX, fromNodeY, toNodeX, toNodeY) 
+                this.drawCircle(fromNodeX, fromNodeY, 20, 'green')
+                this.drawCircle(toNodeX, toNodeY, 20, 'green')
+
+                let rotLine1 = this.rotateLineAngle(fromNodeX, fromNodeY, toNodeX, toNodeY, 10)
+                while(this.calculateDistance(...rotLine1) > 30){
+                    rotLine1 = this.doubleCutAroundMid(...rotLine1)
+                }
+            
+                let rotLine2 = this.rotateLineAngle(fromNodeX, fromNodeY, toNodeX, toNodeY, -10)
+                while(this.calculateDistance(...rotLine2) > 30){
+                    rotLine2 = this.doubleCutAroundMid(...rotLine2)
+                }
+                // console.log("before")
+                // console.log(rotLine1)
+                rotLine1 = this.cutRightHalf(...rotLine1)
+                // console.log(rotLine1)
+                // console.log("after")
+                rotLine2 = this.cutRightHalf(...rotLine2)
+            
+                this.drawEdge(...rotLine1)
+                this.drawEdge(...rotLine2)
+            }
+        }
+  
+    }
+
+    redrawEdgesDeprecated(nodes){
+        let filteredNodes = nodes.filter(node => node.edges.length > 0);
         for(let i in filteredNodes){ // REALLY DUMB
 
             let x1 = filteredNodes[i].x
@@ -100,8 +161,7 @@ class canvasView{
                     if(filteredNodes[w].name != filteredNodes[i].edges[j]){
                         continue
                     }
-
-                    // console.log("w: " + filteredNodes[w].name)
+                    console.log("w: " + filteredNodes[w].name)
 
                     let x2 = filteredNodes[w].x
                     let y2 = filteredNodes[w].y

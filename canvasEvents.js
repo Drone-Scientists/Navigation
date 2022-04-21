@@ -75,8 +75,12 @@ function handleNodePos(nodeName){
 }
 
 function handleNodeEdge(firstNodeName, secondNodeName){
+
+    let newEdge = new Edge(secondNodeName, 1)
+
+
     firstNode = matrix.searchForNodeByName(firstNodeName);
-    firstNode.edges.push(secondNodeName);
+    firstNode.edges.push(newEdge);
     console.log(firstNode.edges);
     canvasV.eraseCanvas();
     canvasV.drawMatrix(matrix.getNodes());

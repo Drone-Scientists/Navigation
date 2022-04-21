@@ -8,6 +8,13 @@ class Node{
     }
 }
 
+class Edge{
+    constructor(to, distance){
+        this.to = to
+        this.distance = distance
+    }
+}
+
 class Matrix{
     nodes = []
     constructor(rows, cols, numOfNodes, distanceBetweenNodes){
@@ -33,7 +40,16 @@ class Matrix{
     }
 
     printNodes(){
-        // console.log(this.nodes)
+        console.log(this.nodes)
+    }
+
+    getEdges(){
+        let edges = []
+        for(let i = 0; i < this.nodes.length; i++){
+            let edgesList = this.nodes[i].edges;
+            edges.push(edgesList)
+        }
+        return edges
     }
 
     getNodes(){
