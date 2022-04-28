@@ -9,8 +9,6 @@ let edgeModeState = false;
 canvas.addEventListener("click",  
 function(event) {
 
-
-
     console.log("edgeModeState", edgeModeState);
     console.log("nodeSelected", nodeSelected);
     
@@ -75,10 +73,7 @@ function handleNodePos(nodeName){
 }
 
 function handleNodeEdge(firstNodeName, secondNodeName){
-
     let newEdge = new Edge(secondNodeName, 1)
-
-
     firstNode = matrix.searchForNodeByName(firstNodeName);
     firstNode.edges.push(newEdge);
     console.log(firstNode.edges);

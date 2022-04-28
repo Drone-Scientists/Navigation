@@ -7,7 +7,6 @@ function createNodeMatrix(){
 
      // validate user input from the matrix input boxes
     if(!validateMatrixInputs()){
-        // console.log("validation says fuck you")
         return
     }
 
@@ -41,7 +40,7 @@ function createNodeMatrix(){
         delete currentCanvasView
     }
     let distanceBetweenNodes = result[3]
-    console.log(distanceBetweenNodes)
+    // console.log(distanceBetweenNodes)
     if (rows < 1){
         alert("Invalid distanceBetweenNodes in addNodeMatrix")
         delete currentCanvasView
@@ -147,13 +146,22 @@ function createEdge(){
 
     // format input
     result = result.split(" ");
+    let threePrams = false;
+    if(result.length == 3){
+        threePrams = true;
+    }
+    if(result.length != 2 && !threePrams){
+        alert("Enter a connection into the box")
+        return
+    }
+
     let fromNodeName = result[0];
     let toNodeName = result[1];
     let x1, x2, y1, y2
     let nodes = matrix.getNodes()
     for(let i in nodes){
         if(nodes[i].name == fromNodeName){
-            console.log(nodes[i].name)
+            // console.log(nodes[i].name)
             x1 = nodes[i].x
             y1 = nodes[i].y
         }
@@ -190,7 +198,13 @@ function createEdge(){
     canvasV.drawEdge(...rotLine2)
     
     // update matrix.edges
-    matrix.updateNodeEdgeByName(result[0], result[1])
+    if (threePrams){
+        matrix.addEdge(fromNodeName, toNodeName, result[2])
+        return
+    }
+    matrix.addEdge(fromNodeName, toNodeName, 1)
+
+
     // matrix.updateNodeEdgeByName(result[1], result[0])
 }
 
@@ -259,4 +273,8 @@ function printEdges(){
     for(let i in edges){
         console.log(i, " ", edges[i])
     }
+}
+
+function findAllPaths(){
+
 }

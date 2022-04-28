@@ -66,6 +66,7 @@ class canvasView{
     // draws an edge / connection on canvas
     drawEdge(x1, y1, x2, y2){
         if (!this.canvas) {
+
             alert("no canvas in drawEdge")
             return;
         }
@@ -79,6 +80,27 @@ class canvasView{
         this.context.moveTo(x1, y1);
         this.context.lineTo(x2, y2);
         this.context.stroke();   
+    }
+
+    drawEdgeByName(firstName, secondName, color, nodes){
+        // console.log("secondName", secondName);
+        // console.log("firstName", firstName);
+        let firstNode = this.searchNodesByName(firstName, nodes);
+        let secondNode = this.searchNodesByName(secondName, nodes);
+        let x1 = firstNode.x;
+        let y1 = firstNode.y;
+        let x2 = secondNode.x;
+        let y2 = secondNode.y;
+
+        this.context.strokeStyle = color;
+        this.context.lineWidth = 2;
+        this.context.beginPath();
+        this.context.moveTo(x1, y1);
+        this.context.lineTo(x2, y2);
+        this.context.stroke();
+
+        this.drawCircle(x1, y1, 20, "green");
+        this.drawCircle(x2, y2, 20, "green");
     }
 
     searchNodesByName(name, nodes){
@@ -96,9 +118,9 @@ class canvasView{
 
     // redraws all the edges / connections on the canvas
     redrawEdges(nodes){
-        console.log("redrawing edges")
+        // console.log("redrawing edges")
         let filteredNodes = nodes.filter(node => node.edges.length > 0);
-        console.log(filteredNodes)
+        // console.log(filteredNodes)
         for(let i in filteredNodes){
             let fromNodeX = filteredNodes[i].x
             let fromNodeY = filteredNodes[i].y
@@ -110,11 +132,11 @@ class canvasView{
                 let toNodeX = toNode.x
                 let toNodeY = toNode.y
 
-                console.log("got here")
-                console.log("FromNodeX", fromNodeX)
-                console.log("FromNodeY", fromNodeY)
-                console.log("ToNodeX", toNodeX)
-                console.log("ToNodeY", toNodeY)
+                // console.log("got here")
+                // console.log("FromNodeX", fromNodeX)
+                // console.log("FromNodeY", fromNodeY)
+                // console.log("ToNodeX", toNodeX)
+                // console.log("ToNodeY", toNodeY)
                 
                 this.drawEdge(fromNodeX, fromNodeY, toNodeX, toNodeY) 
                 this.drawCircle(fromNodeX, fromNodeY, 20, 'green')
@@ -161,7 +183,7 @@ class canvasView{
                     if(filteredNodes[w].name != filteredNodes[i].edges[j]){
                         continue
                     }
-                    console.log("w: " + filteredNodes[w].name)
+                    // console.log("w: " + filteredNodes[w].name)
 
                     let x2 = filteredNodes[w].x
                     let y2 = filteredNodes[w].y

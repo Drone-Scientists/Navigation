@@ -43,6 +43,14 @@ class Matrix{
         console.log(this.nodes)
     }
 
+    getNumberOfNodes(){
+        let count = 0
+        for(let i in this.nodes){
+            count += 1;
+        }
+        return count
+    }
+
     getEdges(){
         let edges = []
         for(let i = 0; i < this.nodes.length; i++){
@@ -93,5 +101,16 @@ class Matrix{
             } 
         }
         return false
+    }
+
+    addEdge(fromEdge, toEdge, dist){
+        let fromNode = this.searchForNodeByName(fromEdge)
+        let toNode = this.searchForNodeByName(toEdge)
+        if(fromNode == null || toNode == null){
+            return
+        }
+        let newEdge = new Edge(Number(toEdge), Number(dist))
+        fromNode.edges.push(newEdge);
+        return
     }
 }

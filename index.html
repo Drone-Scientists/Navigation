@@ -36,24 +36,26 @@
         </div>
 
         <div class="labelInput" >
-            <label for="addEdge">Add connection</label>
+            <label for="addEdge">Input</label>
             <input id="addEdge" type="text" value="" name="addEdge">
-            <button type="button" onclick="createEdge()">Submit connection</button>
         </div>    
     </div>
     <div class="menu">
-        <br> 
-            <button type="button" onclick="clearCanvas()">Clear canvas</button>
+        <br>
             <button type="button" onclick="edgeModeToggle()">Edge Mode</button>
-            <input type="file" name="file" id="file">
+            <button type="button" onclick="createEdge()">Add edge</button>
+            <!-- <input type="file" name="file" id="file"> -->
+            <button onclick="findAllPaths()" name="findAllPaths">Find All Paths</button>
             <button onclick="printEdges()" name="printEdges">Print Edges</button>
+            <button type="button" onclick="clearCanvas()">Clear canvas</button>
+
         </br>
     </div>
-    <canvas id="canvas1" width="1200" height="700" style="border:1px solid #000000;"></canvas> 
+    <canvas id="canvas1" width="1420" height="700" style="border:1px solid #000000;"></canvas> 
 </body>
-<script src="main.js"></script> -->
+<script src="main.js"></script>
 <script src="model.js"></script>
 <script src="view.js"></script>
 <script src="canvasEvents.js"></script>
-<!-- <script src="test.js"></script> -->
+<script src="tt.js"></script>
 
