@@ -293,4 +293,72 @@ class canvasView{
         let y1 = y + d * Math.sin(Math.atan(m))
         return [x1, y1]
     }
+
+    // a function that takes in a line and scales the line
+    scaleLine(x1, y1, x2, y2, scale) {
+        let xMid = (x1 + x2) / 2;
+        let yMid = (y1 + y2) / 2;
+        let x1New = x1 - xMid;
+        let y1New = y1 - yMid;
+        let x2New = x2 - xMid;
+        let y2New = y2 - yMid;
+        let x1NewScale = x1New * scale;
+        let y1NewScale = y1New * scale;
+        let x2NewScale = x2New * scale;
+        let y2NewScale = y2New * scale;
+        let x1NewScaleFinal = x1NewScale + xMid;
+        let y1NewScaleFinal = y1NewScale + yMid;
+        let x2NewScaleFinal = x2NewScale + xMid;
+        let y2NewScaleFinal = y2NewScale + yMid;
+        return [x1NewScaleFinal, y1NewScaleFinal, x2NewScaleFinal, y2NewScaleFinal];
+    }
+
+    // a function that takes in a line and find the line perpendicular to it
+    findPerpendicular(x1, y1, x2, y2) {
+        let m = this.findSlope(x1, y1, x2, y2);
+        let x = x1 + (y2 - y1) / (m * -1);
+        let y = y1 + (x2 - x1) / m;
+        return [x, y];
+    }
+
+    // a function that takes in two lines and checks if both of the lines are parallel
+    checkParallel(x1, y1, x2, y2, x3, y3, x4, y4) {
+        let m1 = this.findSlope(x1, y1, x2, y2);
+        let m2 = this.findSlope(x3, y3, x4, y4);
+        if (m1 === m2) {
+            return true
+        } else {
+            return false
+        }
+    }
+
+    // a function that takes in two lines and checks if both of the lines are perpendicular
+    checkPerpendicular(x1, y1, x2, y2, x3, y3, x4, y4) {
+        let m1 = this.findSlope(x1, y1, x2, y2);
+        let m2 = this.findSlope(x3, y3, x4, y4);
+        if (m1 === -1 / m2) {
+            return true
+        } else {
+            return false
+        }
+    }
+
+    // a function that takes in a line and normalizes it
+    normalizeLine(x1, y1, x2, y2) {
+        let m = this.findSlope(x1, y1, x2, y2);
+        let x = x1 + (y2 - y1) / (m * -1);
+        let y = y1 + (x2 - x1) / m;
+        return [x, y];
+    }
+
+    // a function that takes in 3 lines representing a triangle and returns the triangle doubled in size
+    doubleTriangle(x1, y1, x2, y2, x3, y3) {
+        let x1New = x1 - (x2 - x1) / 2;
+        let y1New = y1 - (y2 - y1) / 2;
+        let x2New = x2 - (x2 - x1) / 2;
+        let y2New = y2 - (y2 - y1) / 2;
+        let x3New = x3 - (x2 - x1) / 2;
+        let y3New = y3 - (y2 - y1) / 2;
+        return [x1New, y1New, x2New, y2New, x3New, y3New];
+    }
 }
